@@ -146,9 +146,7 @@
   <script src="parser.js"></script>
   <script>
         console.log("buildMembersFromRows defined?", typeof buildMembersFromRows);
-        
-</script>
-  <script src="aggregator.js"></script>
+  </script>
   <script src="rules.js"></script>
   <script src="report.js"></script>
  
@@ -186,7 +184,7 @@
 
         <!--to test parser-->
         console.log("members:", members); 
-        
+
         if (!members.length) {
           setStatus('No member rows found. Check that the sheet is named "Pi Chapter - Points".', "error");
           return;
