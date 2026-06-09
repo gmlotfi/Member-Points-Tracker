@@ -8,7 +8,6 @@
 **Goal:** Upload spreadsheet to get a clear report of who is in bad standing and why
 
 ## Glossary
-- **PNM:** Potential New Member — joined mid-semester or all `---`
 - **Unexcused absence:** Present=no, Excused=no (i.e. Absent)
 - **Excused absence:** Marked Excused in OurHouse
 - **Bad Standing:** Failed to meet one or more category requirements
@@ -72,7 +71,7 @@
 **Effective:** Spring 2026
 
 ### How `---` is handled
-Ignored and not counted towards a members total. Means that a member (likely a PNM) joined mid semseter
+`---` is ignored and not counted towards a member's total. 
 
 ### Requirements by Class Year
 
@@ -158,9 +157,7 @@ Updated by editing the file and pushing to GitHub
 
 | Scenario | Expected Behavior |
 |---|---|
-| Member with all `---` | Likely a PNM, ignore any requirements |
-| Member who joined mid-semester | Likely a PNM, ignore any requirements |
 | Requirements change mid-semester | Apply new requirements for the entire semester |
 
-*Last updated: 6/8/2026*  
-*Spec version: 1.0*
+*Last updated: 6/9/2026*  
+*Spec version: 1.0.1*
