@@ -112,8 +112,7 @@ Any further absences from the required Rush, Professional Development, Service, 
 |---|---|
 | `index.html` | UI — file upload, results table |
 | `style.css` | Styling |
-| `parser.js` | Reads .xlsx, normalizes attendance values |
-| `aggregator.js` | Sums attendance per member per category |
+| `parser.js` | Reads .xlsx, normalizes attendance values, aggregates totals per category |
 | `rules.js` | Hardcoded requirements + evaluation logic |
 | `report.js` | Formats results, handles CSV export |
 
@@ -160,4 +159,4 @@ Updated by editing the file and pushing to GitHub
 | Requirements change mid-semester | Apply new requirements for the entire semester |
 
 *Last updated: 6/9/2026*  
-*Spec version: 1.0.1*
+*Spec version: 1.0.2*
