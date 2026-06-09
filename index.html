@@ -144,9 +144,67 @@
 
   <!-- App modules (order matters) -->
   <script src="parser.js"></script>
+  <script>
+        console.log("buildMembersFromRows defined?", typeof buildMembersFromRows);
+        
+</script>
   <script src="aggregator.js"></script>
   <script src="rules.js"></script>
   <script src="report.js"></script>
+ 
+
+  <!--for file reading-->
+  <script>
+    const fileInput = document.getElementById("file-input");
+    const dropZone  = document.getElementById("drop-zone");
+    const statusMsg = document.getElementById("upload-status-msg");
+
+    function setStatus(msg, type = "") {
+      statusMsg.textContent = msg;
+      statusMsg.className = type;
+    }
+
+    async function handleFile(file) {
+      if (!file) return;
+      if (!file.name.endsWith(".xlsx")) {
+        setStatus("Please upload an .xlsx file.", "error");
+        return;
+      }
+      setStatus("Reading spreadsheet…", "loading");
+      try {
+        const buffer = await file.arrayBuffer();
+        const workbook = XLSX.read(buffer, { type: "array" });
+        const SHEET_NAME = "Pi Chapter-Points";
+        let sheet = workbook.Sheets[SHEET_NAME];
+        if (!sheet) {
+          const fallback = workbook.SheetNames[0];
+          console.warn(`Sheet "${SHEET_NAME}" not found — falling back to "${fallback}"`);
+          sheet = workbook.Sheets[fallback];
+        }
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: undefined, blankrows: false });
+        const members = buildMembersFromRows(rows);
+
+        <!--to test parser-->
+        console.log("members:", members); 
+        
+        if (!members.length) {
+          setStatus('No member rows found. Check that the sheet is named "Pi Chapter - Points".', "error");
+          return;
+        }
+        setStatus(`Loaded ${members.length} members.`, "success");
+        renderReport(members);
+      } catch (err) {
+        console.error(err);
+        setStatus(`Error: ${err.message}`, "error");
+      }
+    }
+
+    fileInput.addEventListener("change", (e) => handleFile(e.target.files[0]));
+    dropZone.addEventListener("click", () => fileInput.click());
+    dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("drag-over"); });
+    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+    dropZone.addEventListener("drop", (e) => { e.preventDefault(); dropZone.classList.remove("drag-over"); handleFile(e.dataTransfer.files[0]); });
+  </script>
 
 </body>
 </html>
